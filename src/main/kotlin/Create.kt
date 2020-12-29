@@ -14,11 +14,23 @@ fun testGlobalCoroutines() {
     }
 }
 
-fun testSuspendingFunction() {
 
+suspend fun testJobJoin(){
+    val job =GlobalScope.launch {
+        delay(1000)
+        println("World!")
+    }
+    println("Hello,")
+    job.join()
 }
 
-fun doWork() = runBlocking {
+fun testSuspendingFunction() = runBlocking {
+    launch { doWorld() }
+    println("Hello,")
+}
+
+// 挂起函数 使用 Suspend 修饰
+suspend fun doWorld() {
     delay(1000L)
-    
+    println("World!")
 }
